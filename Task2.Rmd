@@ -1,0 +1,64 @@
+#Name: Vaishali Mali
+##Task 2: To predict a score of a student if he studies for 9.25 hours in a day by supervised machine learning.
+###Simple Linear Regression Model.
+** Input Data as x as no of hours of study and y as scores obtained**
+```{r}
+x=c(2.5,5.1,3.2,8.5,3.5,1.5,9.2,5.5,8.3,2.7,7.7,5.9,4.5,3.3,1.1,8.9,2.5,1.9,6.1,7.4,2.7,4.8,3.8,6.9,7.8)
+y=c(21,47,27,75,30,20,88,60,81,25,85,62,41,42,17,95,30,24,67,69,30,54,35,76,86)
+n=25
+p=2
+```
+** To study the relation between x and y through scatter diagram **
+```{r}
+plot(x,y,pch=18,xlab = "Study Hours",ylab="Scores Obtained",main = "Scatter Diagram")
+r=cor(x,y)
+r               #since |r|> 0.8 there is a strong positive correlation in between x and y
+cor.test(x,y,method="pearson",alt="two.sided")
+2*pt(3.818,8,lower.tail = F)   # To get a P-value
+```
+**Fitting a Model to the given data**
+```{r}
+fit=lm(y~x)
+fit
+B0_hat=2.483673
+B1_hat=9.775803
+y_hat=B0_hat+B1_hat*x   #fitted simple linear regression 
+summary(fit) 
+glm(y~x,family = gaussian)
+aov(fit)
+```
+**Percentage of exlained variation**
+```{r}
+14624.172/(14624.172+722.068)*100
+#The model explains 95.29482 % of the variability in the dependent variable by the independent variable
+```
+**Residual plots**
+```{r}
+res=(y-y_hat)
+qqnorm(res)
+par(mfrow=c(2,2))
+plot(fit)
+fit$fitted
+fit$residuals
+fit$coefficient
+e1=fit$fitted.values
+shapiro.test(e1)
+```
+**Predicted Score when x=9.25**
+```{r}
+y_est=2.483673+9.775803*9.25  
+y_est 
+```
+**Conclusion:**
+`If a student studies for 9.25 hours in a day then he should get 92.90985 percentage of marks.`
+
+                                           --Thank You--
+
+
+
+
+
+
+
+
+
